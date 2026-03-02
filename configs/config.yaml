@@ -1,0 +1,58 @@
+project:
+  name: turbofan-rul-mlops
+  version: "1.0.0"
+  description: "NASA Turbofan RUL Prediction - Industry-Grade MLOps Pipeline"
+
+data:
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  delta_dir: "data/delta"
+  dataset: "train_FD001.txt"
+  test_dataset: "test_FD001.txt"
+  rul_dataset: "RUL_FD001.txt"
+
+preprocessing:
+  rul_cap: 125
+  rolling_window: 5
+  drop_sensors:
+    - sensor_1
+    - sensor_5
+    - sensor_10
+    - sensor_16
+    - sensor_18
+    - sensor_19
+  test_size: 0.2
+  random_state: 42
+
+training:
+  model: "xgboost"
+  n_estimators: 100
+  max_depth: 5
+  learning_rate: 0.05
+  subsample: 0.8
+  colsample_bytree: 0.8
+  objective: "reg:squarederror"
+  random_state: 42
+
+mlflow:
+  experiment_name: "turbofan-rul"
+  tracking_uri: "mlruns"
+  model_name: "turbofan-rul-model"
+
+serving:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 2
+
+azure:
+  storage_account_name: "${AZURE_STORAGE_ACCOUNT}"
+  storage_container: "turbofan-data"
+  resource_group: "turbofan-rg"
+  location: "eastus"
+  acr_name: "${AZURE_ACR_NAME}"
+  app_service_name: "turbofan-rul-api"
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s | %(levelname)s | %(name)s | %(message)s"
+  log_dir: "logs"
