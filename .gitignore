@@ -1,1 +1,6 @@
 ".env" 
+data/processed/
+data/raw/
+.env
+__pycache__/
+*.pyc
