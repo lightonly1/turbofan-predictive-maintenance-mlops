@@ -252,8 +252,8 @@ NASA CMAPSS (Commercial Modular Aero-Propulsion System Simulation)
 ## 👤 Author
 
 **Your Name**
-- LinkedIn: [your-linkedin](https://linkedin.com/in/your-profile)
-- GitHub: [your-github](https://github.com/your-username)
+- LinkedIn: [your-linkedin](https://www.linkedin.com/in/krit-prakash-9a32a1246/)
+- GitHub: [your-github](https://github.com/lightonly1)
 
 ---
 
