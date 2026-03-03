@@ -279,19 +279,20 @@ def run_data_quality_checks(df: DataFrame) -> bool:
 
 def save_as_parquet(df: DataFrame, output_path: str) -> None:
     """
-    Save processed DataFrame as Parquet format.
-    Parquet = columnar, compressed, industry standard.
+    Save processed DataFrame.
+    Uses pandas+CSV for Windows compatibility.
+    In production (Azure Databricks) this writes Parquet to ADLS.
     """
     logger.info(f"💾 Saving processed data to: {output_path}")
 
-    (
-        df.write
-        .mode("overwrite")
-        .partitionBy("engine_id")  # Partition for faster reads
-        .parquet(output_path)
-    )
+    # Convert to pandas and save as CSV (Windows compatible)
+    Path(output_path).mkdir(parents=True, exist_ok=True)
+    pdf = df.toPandas()
+    csv_path = os.path.join(output_path, "train_processed.csv")
+    pdf.to_csv(csv_path, index=False)
 
-    logger.info(f"✅ Saved as Parquet (partitioned by engine_id)")
+    logger.info(f"✅ Saved as CSV: {csv_path}")
+    logger.info(f"   Rows: {len(pdf):,} | Columns: {len(pdf.columns)}")
 
 
 def save_summary_stats(df: DataFrame, output_path: str) -> None:
