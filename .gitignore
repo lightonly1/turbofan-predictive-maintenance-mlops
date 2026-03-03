@@ -4,3 +4,6 @@ data/raw/
 .env
 __pycache__/
 *.pyc
+mlruns/
+logs/
+*.db
