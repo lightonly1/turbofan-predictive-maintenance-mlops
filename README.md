@@ -1,4 +1,4 @@
-# 🛠️ Turbofan RUL Prediction — Industry-Grade MLOps Pipeline
+# 🛠️ Turbofan RUL Prediction - Industry-Grade MLOps Pipeline
 
 [![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)](https://python.org)
 [![PySpark](https://img.shields.io/badge/PySpark-3.5-orange?logo=apache-spark)](https://spark.apache.org)
