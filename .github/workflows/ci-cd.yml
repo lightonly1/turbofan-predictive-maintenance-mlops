@@ -11,7 +11,6 @@ env:
   IMAGE_NAME: turbofan-rul-api
 
 jobs:
-  # ── Job 1: Run Tests ──────────────────────────────────
   test:
     runs-on: ubuntu-latest
     steps:
@@ -30,7 +29,6 @@ jobs:
         run: |
           pytest tests/ -v --tb=short || true
 
-  # ── Job 2: Build and Push Docker Image ───────────────
   build-and-push:
     needs: test
     runs-on: ubuntu-latest
@@ -52,8 +50,7 @@ jobs:
           push: true
           tags: turbofanregistry.azurecr.io/turbofan-rul-api:latest
 
-  # ── Job 3: Deploy to Azure App Service ───────────────
- deploy:
+  deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
@@ -68,3 +65,7 @@ jobs:
         with:
           app-name: turbofan-rul-app
           images: turbofanregistry.azurecr.io/turbofan-rul-api:latest
+
+git add .github/workflows/ci-cd.yml
+git commit -m "fix: YAML syntax error in ci-cd pipeline"
+git push
