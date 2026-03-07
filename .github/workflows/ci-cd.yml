@@ -53,15 +53,18 @@ jobs:
           tags: turbofanregistry.azurecr.io/turbofan-rul-api:latest
 
   # ── Job 3: Deploy to Azure App Service ───────────────
-  deploy:
+ deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
           app-name: turbofan-rul-app
-          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
           images: turbofanregistry.azurecr.io/turbofan-rul-api:latest
-          slot-name: production
