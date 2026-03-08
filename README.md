@@ -147,6 +147,17 @@ Source: [NASA Prognostics Data Repository](https://www.nasa.gov/content/prognost
 
 ---
 
+## Model Results
+
+### Actual vs Predicted RUL
+![Actual vs Predicted](docs/results/actual_vs_predicted.png)
+
+### Feature Importance
+![Feature Importance](docs/results/feature_importance.png)
+
+### SHAP Summary
+![SHAP Summary](docs/results/shap_summary.png)
+
 ## Author
 
 Krit Prakash
